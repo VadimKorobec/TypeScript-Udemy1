@@ -1,95 +1,26 @@
-class Department {
-  // private id: string;
-  // private name: string;
-  protected employees: string[] = [];
+interface Greetable {
+  name: string;
 
-  constructor(protected readonly id: string, public name: string) {
-    // this.id = id;
-    // this.name = name;
+  greet(phrase: string): void;
+}
+
+class Person implements Greetable {
+  name: string;
+  age = 30;
+
+  constructor(name: string) {
+    this.name = name;
   }
 
-  static createEmployee(name: string) {
-    return { name: name };
-  }
-
-  describe(this: Department) {
-    console.log(`Department: (${this.id} ${this.name}) `);
-  }
-
-  addEmployee(employee: string) {
-    this.employees.push(employee);
-  }
-
-  printEmployeeInformation() {
-    console.log(this.employees.length);
-    console.log(this.employees);
+  greet(phrase: string) {
+    console.log(phrase + "" + this.name);
   }
 }
 
-class ITDepartment extends Department {
-  constructor(id: string, private admins: string[]) {
-    super(id, "IT");
-  }
-}
+let user1: Greetable;
 
-const employee1 = Department.createEmployee("Max");
-console.log(employee1);
+user1 = new Person("Vadim");
 
-const it = new ITDepartment("id1", ["Jake"]);
+user1.greet("Hi there - I am ");
 
-it.addEmployee("Max");
-it.addEmployee("Jake");
-it.addEmployee("Popa");
-
-it.describe();
-it.printEmployeeInformation();
-
-console.log(it);
-
-class AccountingDepartment extends Department {
-  private lastReport: string;
-
-  get mostRecentReport() {
-    if (this.lastReport) {
-      return this.lastReport;
-    }
-    throw new Error("No report found");
-  }
-
-  set mostRecentReport(value: string) {
-    if (!value) {
-      throw new Error("Please pass in a value!");
-    }
-    this.addReport(value);
-  }
-
-  constructor(id: string, private reports: string[]) {
-    super(id, "Accounting");
-    this.lastReport = reports[0];
-  }
-
-  describe() {
-    console.log("Accounting Department - ID: " + this.id);
-  }
-
-  addEmployee(name: string) {
-    if (name === "Max") {
-      return;
-    }
-    this.employees.push(name);
-  }
-
-  addReport(text: string) {
-    this.reports.push(text);
-    this.lastReport = text;
-  }
-
-  printReports() {
-    console.log(this.reports);
-  }
-}
-
-const accounting = new AccountingDepartment("id2", []);
-accounting.mostRecentReport = "Your End Report";
-
-console.log(accounting.mostRecentReport);
+console.log(user1);
