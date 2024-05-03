@@ -20,30 +20,30 @@ interface Greetable extends Named {
   greet(phrase: string): void;
 }
 
-class Person implements Greetable {
-  name?: string;
-  age = 30;
+// class Person implements Greetable {
+//   name?: string;
+//   age = 30;
 
-  constructor(name?: string) {
-    if (name) {
-      this.name = name;
-    }
-  }
+//   constructor(name?: string) {
+//     if (name) {
+//       this.name = name;
+//     }
+//   }
 
-  greet(phrase: string) {
-    if (this.name) {
-      console.log(phrase + "" + this.name);
-    } else {
-      console.log("Hi");
-    }
-  }
-}
+//   greet(phrase: string) {
+//     if (this.name) {
+//       console.log(phrase + "" + this.name);
+//     } else {
+//       console.log("Hi");
+//     }
+//   }
+// }
 
-let user1: Greetable;
+// let user1: Greetable;
 
-user1 = new Person("Cat");
+// user1 = new Person("Cat");
 // user1.name = "Cat";
 
-user1.greet("Hi there - I am ");
+// user1.greet("Hi there - I am ");
 
-console.log(user1);
+// console.log(user1);
